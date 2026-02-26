@@ -1,1 +1,17 @@
+CREATE TABLE IF NOT EXISTS orders (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  customer_name TEXT,
+  phone TEXT,
+  address TEXT,
+  total_cents INTEGER NOT NULL,
+  status TEXT NOT NULL DEFAULT 'pending',
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
 
+CREATE TABLE IF NOT EXISTS order_items (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  order_id INTEGER NOT NULL,
+  item_name TEXT NOT NULL,
+  price_cents INTEGER NOT NULL,
+  FOREIGN KEY(order_id) REFERENCES orders(id)
+);
